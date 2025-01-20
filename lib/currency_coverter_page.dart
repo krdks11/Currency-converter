@@ -1,8 +1,25 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class CurrencyConverterMaterialPage extends StatelessWidget {
+class CurrencyConverterMaterialPage extends StatefulWidget {
   const CurrencyConverterMaterialPage({super.key});
+  @override
+  State<CurrencyConverterMaterialPage> createState() {
+    return _CurrrencyConverterMaterialPageState();
+  }
+}
+
+class _CurrrencyConverterMaterialPageState
+    extends State<CurrencyConverterMaterialPage> {
+  double result = 0;
+  final TextEditingController textEditingController = TextEditingController();
+
+  void convert() {
+    setState(
+      () {
+        result = double.parse(textEditingController.text) * 81;
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +46,8 @@ class CurrencyConverterMaterialPage extends StatelessWidget {
         elevation: 0,
         title: Text(
           'Currency Coverter',
-          style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+          style: TextStyle(
+              fontWeight: FontWeight.bold, color: Colors.white, fontSize: 30),
         ),
         centerTitle: true,
       ),
@@ -40,20 +58,31 @@ class CurrencyConverterMaterialPage extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(10),
               margin: const EdgeInsets.all(10),
-              // color: Colors.black87,
-
-              child: const Text(
-                '0.00',
-                style: TextStyle(
-                  fontSize: 35,
-                  fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(255, 255, 255, 255),
-                ),
+              child: Row(
+                mainAxisAlignment:
+                    MainAxisAlignment.center, // Centers the content
+                children: [
+                  const Icon(
+                    Icons.currency_rupee, // Use rupee icon
+                    size: 35,
+                    color: Color.fromARGB(255, 255, 255, 255),
+                    weight: 1,
+                  ),
+                  Text(
+                    result.toString(),
+                    style: const TextStyle(
+                      fontSize: 35,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 255, 255, 255),
+                    ),
+                  ),
+                ],
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(10),
               child: TextField(
+                controller: textEditingController,
                 style: const TextStyle(
                   color: Color.fromARGB(255, 255, 255, 255),
                 ),
@@ -75,11 +104,7 @@ class CurrencyConverterMaterialPage extends StatelessWidget {
               ),
             ),
             ElevatedButton(
-              onPressed: () {
-                if (kDebugMode) {
-                  print('button was clicked');
-                }
-              },
+              onPressed: convert,
               style: ElevatedButton.styleFrom(
                 elevation: (15),
                 foregroundColor: const Color.fromARGB(255, 0, 0, 0),
