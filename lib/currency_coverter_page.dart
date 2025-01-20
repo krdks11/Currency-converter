@@ -16,7 +16,8 @@ class _CurrrencyConverterMaterialPageState
   void convert() {
     setState(
       () {
-        result = double.parse(textEditingController.text) * 81;
+        result = double.parse(textEditingController.text) *
+            86.54; //as of 20/1/2025 rate
       },
     );
   }
