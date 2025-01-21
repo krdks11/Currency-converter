@@ -70,7 +70,9 @@ class _CurrrencyConverterMaterialPageState
                     weight: 1,
                   ),
                   Text(
-                    result.toString(),
+                    result != 0
+                        ? result.toStringAsFixed(3)
+                        : result.toStringAsFixed(2),
                     style: const TextStyle(
                       fontSize: 35,
                       fontWeight: FontWeight.bold,
@@ -103,6 +105,9 @@ class _CurrrencyConverterMaterialPageState
                   decimal: true,
                 ),
               ),
+            ),
+            const SizedBox(
+              height: 10,
             ),
             ElevatedButton(
               onPressed: convert,
